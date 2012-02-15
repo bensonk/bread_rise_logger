@@ -25,6 +25,9 @@ class ReadingsController < ApplicationController
   # GET /readings/new.json
   def new
     @reading = Reading.new
+    unless @reading.rise
+      @reading.rise = rise.last
+    end
 
     respond_to do |format|
       format.html # new.html.erb
