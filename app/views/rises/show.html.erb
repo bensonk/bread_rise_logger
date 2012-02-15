@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @rise.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @rise.description %>
+</p>
+
+<div id="flot_placeholder" style="width: 600px; height: 300px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative;">
+</div>
+
+<table id="data" clear="both">
+  <th>
+    <tr>
+      <td>Height</td>
+      <td>Intensity</td>
+    </tr>
+  </th>
+  <% @rise.readings.each do |reading| %>
+    <tr id="reading_<%= reading.id %>">
+      <td> <%= reading.height %> </td>
+      <td> <%= reading.intensity %> </td>
+    </tr>
+  <% end %>
+</table>
+
+
+<%= link_to 'Edit', edit_rise_path(@rise) %> |
+<%= link_to 'Back', rises_path %>
+
+
+<script type="text/javascript">
+  var heights = <%= @rise.heights.to_json %>;
+  var intensities = <%= @rise.intensities.to_json %>;
+  var points = _.zip(_.range(heights.length), heights);
+  $(function() {
+    $.plot($("#flot_placeholder"), [ points ]);
+  });
+</script>
+
+
