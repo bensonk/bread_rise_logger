@@ -1,4 +1,6 @@
 class ReadingsController < ApplicationController
+  protect_from_forgery :except => [ :create ]
+
   # GET /readings
   # GET /readings.json
   def index
@@ -26,7 +28,7 @@ class ReadingsController < ApplicationController
   def new
     @reading = Reading.new
     unless @reading.rise
-      @reading.rise = rise.last
+      @reading.rise = Rise.last
     end
 
     respond_to do |format|
@@ -44,6 +46,9 @@ class ReadingsController < ApplicationController
   # POST /readings.json
   def create
     @reading = Reading.new(params[:reading])
+    unless @reading.rise
+      @reading.rise = Rise.last
+    end
 
     respond_to do |format|
       if @reading.save
