@@ -14,6 +14,8 @@ class RisesController < ApplicationController
   # GET /rises/1.json
   def show
     @rise = Rise.find(params[:id])
+    max_height = @rise.heights.max
+    @dough_heights = @rise.heights.collect { |h| max_height - h + @rise.base_height }
 
     respond_to do |format|
       format.html # show.html.erb

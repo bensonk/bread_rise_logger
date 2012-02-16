@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215013626) do
+ActiveRecord::Schema.define(:version => 20120216081339) do
 
   create_table "readings", :force => true do |t|
     t.float    "height"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120215013626) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "base_height", :default => 0
   end
 
 end
