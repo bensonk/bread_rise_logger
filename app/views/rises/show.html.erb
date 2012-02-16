@@ -10,8 +10,13 @@
   <%= @rise.description %>
 </p>
 
-<div id="flot_placeholder" style="width: 1024px; height: 600px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative;">
+<div id="flot_heights" style="width: 1024px; height: 600px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative;">
 </div>
+
+<div id="flot_intensities" style="width: 1024px; height: 600px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; position: relative;">
+</div>
+
+
 
 <table id="data" clear="both">
   <th>
@@ -38,8 +43,10 @@
   var intensities = <%= @rise.intensities.to_json %>;
   var bread_heights = <%= @dough_heights.to_json %>;
   var points = _.zip(_.range(bread_heights.length), bread_heights);
+  var intensity_points = _.zip(_.range(intensities.length), intensities);
   $(function() {
-    $.plot($("#flot_placeholder"), [ points ]);
+    $.plot($("#flot_heights"), [ points ]);
+    $.plot($("#flot_intensities"), [ intensity_points ]);
   });
 </script>
 
