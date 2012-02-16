@@ -15,10 +15,6 @@ class RisesController < ApplicationController
   def show
     @rise = Rise.find(params[:id])
     max_height = @rise.heights.max
-    logger.info "Type of max_height: #{max_height.class.to_s}"
-    logger.info "Type of rise.base_height: #{@rise.base_height.class.to_s}"
-    logger.info "Type of h: #{@rise.heights[0].class.to_s}"
-
     @dough_heights = @rise.heights.collect { |h| max_height - h + @rise.base_height.to_f }
 
     respond_to do |format|
